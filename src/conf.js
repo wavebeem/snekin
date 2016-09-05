@@ -20,7 +20,11 @@ function CONFR(conf, key) {
 
 
 const conf = {}
-if (process.argv.length !== 3) {
+const wantsHelp =
+  process.argv.length !== 3 ||
+  /^(?:--help|-help|help|-h|-\?)$/.test(process.argv[2])
+
+if (wantsHelp) {
   die(`\
 Snekin requires a configuration file to function.
 
