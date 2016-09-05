@@ -2,6 +2,7 @@
 
 const fs = require('fs')
 const die = require("./die")
+const usage = require("./usage")
 
 function CONF(conf, key, fallback) {
   if (conf.hasOwnProperty(key)) {
@@ -25,25 +26,7 @@ const wantsHelp =
   /^(?:--help|-help|help|-h|-\?)$/.test(process.argv[2])
 
 if (wantsHelp) {
-  die(`\
-Snekin requires a configuration file to function.
-
-Please take the following template and fill in your configuration details
-and save it somewhere, then call Snekin again with the path to the
-configuration file.
-
-Save this to ~/.snekin.json:
-
-{
-  "host": "127.0.0.1",
-  "port": 8080,
-  "slack_domain": "my-slack-team-name",
-  "slack_token": "MY_SLACK_TOKEN"
-}
-
-And then run this command:
-
-$ snekin ~/.snekin.json`)
+  usage()
 }
 
 const filename = process.argv[2]

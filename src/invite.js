@@ -1,52 +1,46 @@
 "use strict"
 
+const request = require("request")
+const conf = require("./conf")
+
+const url = "https://" + conf.DOMAIN + ".slack.com/api/users.admin.invite"
+
+function messageForBody(err, unparsedBody) {
+  const body = unparsedBody ? JSON.parse(unparsedBody) : {}
+  const ok = body.ok
+  const slackError = body.error
+  const needed = body.needed
+  if (err) {
+    console.error("Network error:", err)
+    return "TODO: err"
+  } else if (ok) {
+    return "Please check your email for a link to join " +
+      conf.DOMAIN + ".slack.com"
+  } else if (slackError === "missing_scope" && needed === "admin") {
+    return "The Slack token is missing admin scope"
+  } else if (slackError === "already_invited") {
+    return "You have already been invited, please check your email again"
+  } else if (slackError === "already_in_team") {
+    return "You are already part of " + conf.DOMAIN + ".slack.com"
+  } else if (slackError === "invalid_email") {
+    return "Invalid email"
+  } else {
+    console.error(slackError)
+    return "Unknown Slack API error"
+  }
+  throw new Error("SHOULD NOT GET HERE")
+}
+
 function invite(req, res) {
-  // TODO: Actually send the invite
-  res.send("Your invitation has been sent")
+  const form = {
+    set_active: true,
+    email: req.body.email,
+    token: conf.TOKEN
+  }
+  request.post(url, {form}, (err, _slackResponse, body) => {
+    const message = messageForBody(err, body)
+    res.render("invite", {message, DOMAIN: conf.DOMAIN})
+  })
 }
 
 module.exports = invite
-
-// import request from 'superagent'
-//
-// export default function invite ({ org, token, email, channel }, fn){
-//   let data = { email, token }
-//
-//   if (channel) {
-//     data.channels = channel
-//     data.ultra_restricted = 1
-//     data.set_active = true
-//   }
-//
-//   request
-//   .post(`https://${org}.slack.com/api/users.admin.invite`)
-//   .type('form')
-//   .send(data)
-//   .end(function (err, res){
-//     if (err) return fn(err)
-//     if (200 != res.status) {
-//       fn(new Error(`Invalid response ${res.status}.`))
-//       return
-//     }
-//
-//     // If the account that owns the token is not admin, Slack will oddly
-//     // return `200 OK`, and provide other information in the body. So we
-//     // need to check for the correct account scope and call the callback
-//     // with an error if it's not high enough.
-//     let {ok, error: providedError, needed} = res.body
-//     if (!ok) {
-//       if (providedError === 'missing_scope' && needed === 'admin') {
-//         fn(new Error(`Missing admin scope: The token you provided is for an account that is not an admin. You must provide a token from an admin account in order to invite users through the Slack API.`))
-//       } else if (providedError === 'already_invited') {
-//         fn(new Error('You have already been invited to Slack. Check for an email from feedback@slack.com.'))
-//       } else if (providedError === 'already_in_team') {
-//         fn(new Error(`Sending you to Slack...`))
-//       } else {
-//         fn(new Error(providedError))
-//       }
-//       return
-//     }
-//
-//     fn(null)
-//   })
-// }

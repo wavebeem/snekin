@@ -1,7 +1,3 @@
-"use strict"
-
-require("isomorphic-fetch")
-const path = require("path")
 const express = require("express")
 const bodyParser = require("body-parser")
 const conf = require("./conf")
@@ -25,7 +21,7 @@ app.post("/invite", invite)
 app.get("/*", goHome)
 
 function start() {
-  console.log("Customize with keys \"host\" and \"port\"")
+  console.log("Run 'snekin --help' for more information")
   console.log("Snekin listening on http://" + conf.HOST + ":" + conf.PORT)
 }
 
