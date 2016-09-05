@@ -1,12 +1,14 @@
+const path = require("path")
 const express = require("express")
 const bodyParser = require("body-parser")
 const conf = require("./conf")
 const invite = require("./invite")
 
 const app = express()
+app.set("views", path.resolve(__dirname, "..", "views"))
 app.set("view engine", "ejs")
 app.use(bodyParser.urlencoded({extended: false}))
-app.use(express.static("static"))
+app.use(express.static(path.resolve(__dirname, "..", "static")))
 
 function index(req, res) {
   res.render("index", conf)

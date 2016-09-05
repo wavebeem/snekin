@@ -1,6 +1,6 @@
 {
   "name": "snekin",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A minimal clone of Slackin without websockets or anything fancy",
   "main": "src/main.js",
   "scripts": {
