@@ -1,0 +1,29 @@
+{
+  "name": "snekin",
+  "version": "1.0.0",
+  "description": "A minimal clone of Slackin without websockets or anything fancy",
+  "main": "src/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "snekin": "bin/snekin"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wavebeem/snekin.git"
+  },
+  "keywords": [],
+  "author": "Brian Mock <brian@mockbrian.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wavebeem/snekin/issues"
+  },
+  "homepage": "https://github.com/wavebeem/snekin#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "ejs": "^2.5.1",
+    "express": "^4.14.0",
+    "isomorphic-fetch": "^2.2.1"
+  }
+}

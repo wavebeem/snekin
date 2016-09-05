@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Join <%= locals.DOMAIN %>.slack.com</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="style.css" type="text/css" rel="stylesheet">
+  </head>
+  <body>
+    <h1>Join <%= locals.DOMAIN %>.slack.com</h1>
+    <% if (locals.COC) { %>
+      <p>
+        Please read and agree to the
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="<%= locals.COC %>"
+        >
+          Code of Conduct
+        </a>
+      </p>
+    <% } %>
+    <form method="POST" action="/invite">
+      <label for="email">Email address</label>
+      <input type="text" name="email" id="email">
+      <button type="submit">Join</button>
+    </form>
+  </body>
+</html>

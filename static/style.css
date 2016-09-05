@@ -1,0 +1,79 @@
+* {
+  box-sizing: border-box;
+}
+
+h1 {
+  font-size: 120%;
+  font-weight: bold;
+  margin-top: 0;
+}
+
+button,
+input,
+label {
+  display: block;
+  width: 100%;
+  font: inherit;
+}
+
+label {
+  margin-top: 20px;
+}
+
+button,
+input {
+  border-radius: 4px;
+}
+
+label {
+  margin-bottom: 5px;
+  color: #666;
+}
+
+button {
+  margin-top: 30px;
+  border: 0;
+  background: #2a4;
+  color: #fff;
+  padding: 10px 20px;
+  border-bottom: 4px solid rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+}
+
+input {
+  border: 2px solid #ccc;
+  padding: 4px 8px;
+}
+
+input:focus {
+  box-shadow: 0 0 0 1px #000;
+  border-color: #000;
+  outline: 0;
+}
+
+a {
+  color: #46d;
+  text-decoration: none;
+  border-bottom: 2px solid currentColor;
+  padding-bottom: 1px;
+}
+
+a:focus {
+  outline: 3px solid #fcaf3e;
+  outline-offset: 1px;
+}
+
+button:focus {
+  outline: 2px dotted #fff;
+  outline-offset: -4px;
+}
+
+body {
+  max-width: 700px;
+  margin: 0 auto;
+  font-family: sans-serif;
+  background: #fafafa;
+  color: #000;
+  font-size: 30px;
+  padding: 20px;
+}
